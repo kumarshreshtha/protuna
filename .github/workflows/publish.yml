@@ -1,0 +1,66 @@
+name: Publish package
+
+on:
+  workflow_dispatch:
+    inputs:
+      destination:
+        description: Package index
+        required: true
+        default: testpypi
+        type: choice
+        options:
+          - testpypi
+          - pypi
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.6.3"
+          python-version: "3.12"
+
+      - name: Build distributions
+        run: uv build
+
+      - name: Check distribution metadata
+        run: uv run --with twine --no-project twine check dist/*
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: distributions
+          path: dist/*
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment:
+      name: ${{ inputs.destination }}
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v6
+        with:
+          name: distributions
+          path: dist/
+
+      - name: Publish to TestPyPI
+        if: inputs.destination == 'testpypi'
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+
+      - name: Publish to PyPI
+        if: inputs.destination == 'pypi'
+        uses: pypa/gh-action-pypi-publish@release/v1
