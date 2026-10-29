@@ -1,0 +1,19 @@
+{
+  "name": "protuna-skills",
+  "version": "0.1.0",
+  "description": "Skills for coding with Protuna: build protein optimization pipelines and implement custom protein engineering components.",
+  "author": {
+    "name": "Kumar Shreshtha"
+  },
+  "homepage": "https://github.com/kumarshreshtha/protuna",
+  "repository": "https://github.com/kumarshreshtha/protuna",
+  "license": "MIT",
+  "keywords": [
+    "protuna",
+    "protein-engineering",
+    "lead-optimization",
+    "bayesian-optimization",
+    "machine-learning",
+    "python"
+  ]
+}

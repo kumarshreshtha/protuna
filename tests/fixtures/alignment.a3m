@@ -1,0 +1,16 @@
+>query
+ACDEFGHIKLMNPQRSTVWY
+>homolog1 insert after F
+ACDEFaGHIKLMNPQRSTVWY
+>homolog2 gap at L
+ACDEFGHIK-MNPQRSTVWY
+>homolog3 inserts at start
+acACDEFGHIKLMNPQRSTVWY
+>homolog4 identical to query
+ACDEFGHIKLMNPQRSTVWY
+>homolog5 gaps at A and V
+-CDEFGHIKLMNPQRST-WY
+>homolog6 insert between P and Q
+ACDEFGHIKLMNPmQRSTVWY
+>homolog7 A to W substitution
+WCDEFGHIKLMNPQRSTVWY

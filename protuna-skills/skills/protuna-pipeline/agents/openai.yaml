@@ -1,0 +1,3 @@
+interface:
+  display_name: "Protuna Pipeline"
+  short_description: "Build and execute Protuna optimization pipelines"

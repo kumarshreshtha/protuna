@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1496" height="200" viewBox="0 0 1496 200" role="img" aria-labelledby="title"><title id="title">Protuna</title><g fill="#C8E600" fill-rule="evenodd">
+    <path id="letter-p" transform="translate(0 0)" d="M18 0H176Q200 0 200 24V140Q200 164 176 164H76V200H0V115.5Q0 105.5 10 105.5H114Q124 105.5 124 95.5V68.5Q124 58.5 114 58.5H0V18Q0 0 18 0ZM56 67h36q12 0 12 12v6q0 12-12 12h-36q-12 0-12-12v-6q0-12 12-12Z"/>
+    <path id="letter-r" transform="translate(216 0)" d="M0 0H176Q200 0 200 24V126Q200 150 176 150H160L200 200H104L80 170V200H0ZM82 67h36q12 0 12 12v6q0 12-12 12h-36q-12 0-12-12v-6q0-12 12-12Z"/>
+    <path id="letter-o" transform="translate(432 0)" d="M24 0H176Q200 0 200 24V176Q200 200 176 200H24Q0 200 0 176V24Q0 0 24 0ZM82 67h36q12 0 12 12v6q0 12-12 12h-36q-12 0-12-12v-6q0-12 12-12Z"/>
+    <path id="letter-t" transform="translate(648 0)" d="M18 0H182Q200 0 200 18V66H140V190Q140 200 130 200H70Q60 200 60 190V66H0V18Q0 0 18 0Z"/>
+    <path id="letter-u" transform="translate(864 0)" d="M0 0H78V108Q78 124 94 124H106Q122 124 122 108V0H200V172Q200 200 172 200H28Q0 200 0 172Z"/>
+    <path id="letter-n" transform="translate(1080 0)" d="M0 0H72L124 86V0H182Q200 0 200 18V200H128L76 114V200H0Z"/>
+    <path id="letter-a" transform="translate(1296 0)" d="M24 0H182Q200 0 200 18V58.5H86Q76 58.5 76 68.5V95.5Q76 105.5 86 105.5H190Q200 105.5 200 115.5V200H120V174Q120 164 110 164H90Q80 164 80 174V200H0V24Q0 0 24 0ZM108 67h36q12 0 12 12v6q0 12-12 12h-36q-12 0-12-12v-6q0-12 12-12Z"/>
+  </g></svg>

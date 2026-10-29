@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  quality:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ruff
+            command: uv run --locked ruff check . && uv run --locked ruff format --check .
+          - name: Types (ty)
+            command: uv run --locked ty check
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.6.3" # Match the uv pre-commit hook.
+          python-version: "3.12"
+          enable-cache: true
+          cache-suffix: quality
+      - name: Install locked dependencies
+        run: uv sync --locked
+      - name: Run check
+        run: ${{ matrix.command }}
+
+  tests:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: ${{ matrix.timeout }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Unit tests
+            # Include library doctests without collecting integration modules.
+            paths: tests/unit protuna
+            marker: not integration
+            timeout: 30
+          - name: Integration tests
+            paths: tests/integration
+            # Override pytest's default exclusion of integration tests.
+            marker: integration
+            timeout: 90
+    env:
+      # Keep tensor libraries from oversubscribing CPUs inside Ray workers.
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      TOKENIZERS_PARALLELISM: "false"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.6.3"
+          python-version: "3.12"
+          enable-cache: true
+          cache-suffix: tests
+      - name: Install locked dependencies
+        run: uv sync --locked
+      - name: Run tests
+        run: uv run --locked pytest ${{ matrix.paths }} -m '${{ matrix.marker }}' -ra

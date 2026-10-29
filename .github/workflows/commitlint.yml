@@ -1,0 +1,51 @@
+name: Commitlint
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  commitlint:
+    name: Commitlint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Both endpoints and every commit in the PR must be available.
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.6.3"
+          python-version: "3.12"
+          enable-cache: true
+          cache-suffix: commitlint
+      - name: Validate every PR commit
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        # Reuse the pinned local hook and commitlint.config.js. uv tool run
+        # avoids installing the protein/model dependencies for this job.
+        shell: bash
+        run: |
+          set -euo pipefail
+          message_file=$(mktemp)
+          trap 'rm -f "$message_file"' EXIT
+          failed=0
+          while IFS= read -r commit; do
+            echo "Checking commit $commit"
+            git show -s --format=%B "$commit" > "$message_file"
+            if ! uv tool run --from pre-commit==4.5.1 pre-commit run commitlint \
+              --hook-stage commit-msg --commit-msg-filename "$message_file"; then
+              failed=1
+            fi
+          done < <(git rev-list --reverse "$BASE_SHA..$HEAD_SHA")
+          exit "$failed"

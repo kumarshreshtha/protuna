@@ -1,0 +1,41 @@
+include = ["protuna/**/*.py", "tests/**/*.py"]
+
+[lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # pydocstyle
+    "D",
+    # flake8-annotations
+    "ANN",
+]
+
+ignore = ["ANN204", "ANN002", "ANN003", "F722"]
+
+[lint.isort]
+# google-like isort profile
+force-single-line = true
+force-sort-within-sections = true
+single-line-exclusions = ["typing", "protuna.typing", "collections.abc", "jaxtyping"]
+order-by-type = false
+
+[lint.pydocstyle]
+convention = "google"
+
+[lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true
+
+[lint.per-file-ignores]
+"test_*.py" = ["D100"]
+"*_test.py" = ["D100"]

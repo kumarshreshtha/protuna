@@ -1,0 +1,52 @@
+default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]
+
+repos:
+- repo: local
+  hooks:
+  - id: sync-readme-example
+    name: Sync README quickstart example
+    entry: uv run python scripts/sync_readme_example.py
+    language: system
+    files: ^(README\.md|examples/getting_started\.py|scripts/sync_readme_example\.py)$
+    pass_filenames: false
+  - id: sync-skill-examples
+    name: Sync bundled skill examples
+    entry: uv run python scripts/sync_skill_examples.py
+    language: system
+    files: ^(examples/.*\.py|protuna-skills/skills/protuna-components/examples/.*\.py|scripts/sync_skill_examples\.py)$
+    pass_filenames: false
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v3.2.0
+  hooks:
+  - id: trailing-whitespace
+  - id: end-of-file-fixer
+  - id: check-yaml
+  - id: check-added-large-files
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  # Ruff version. Keep in sync with the `ruff` floor in pyproject.toml.
+  rev: v0.16.4
+  hooks:
+    # Run the linter.
+    - id: ruff
+      args: [ --fix ]
+    # Run the formatter.
+    - id: ruff-format
+- repo: https://github.com/astral-sh/uv-pre-commit
+  # uv version.
+  rev: 0.6.3
+  hooks:
+    # Update the uv lockfile
+    - id: uv-lock
+- repo: https://github.com/astral-sh/ty-pre-commit
+  # ty version.
+  rev: v0.0.76
+  hooks:
+    - id: ty
+- repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+  rev: v9.26.0
+  hooks:
+    - id: commitlint
+      stages: [commit-msg]
+      pass_filenames: true
+      additional_dependencies: ['@commitlint/config-conventional']

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Extend Protuna"
+  short_description: "Build custom Protuna campaign components"

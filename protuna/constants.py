@@ -1,0 +1,5 @@
+"""Shared constants."""
+
+AA_UPPERCASE = "ACDEFGHIKLMNPQRSTVWY"
+
+PROTEIN_ALPHABET = tuple(AA_UPPERCASE)

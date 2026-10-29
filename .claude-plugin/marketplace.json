@@ -1,0 +1,16 @@
+{
+  "name": "protuna",
+  "owner": {
+    "name": "Kumar Shreshtha"
+  },
+  "metadata": {
+    "description": "Skills for coding with Protuna, the protein engineering optimization framework."
+  },
+  "plugins": [
+    {
+      "name": "protuna-skills",
+      "source": "./protuna-skills",
+      "description": "Build Protuna optimization pipelines and implement custom protein engineering components."
+    }
+  ]
+}

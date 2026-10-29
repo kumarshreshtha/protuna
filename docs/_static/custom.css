@@ -1,0 +1,458 @@
+/* Quiet surfaces, compact navigation, and room for API signatures. */
+:root {
+  --protuna-code-string: #62625B;
+  --protuna-code-comment: #A0A096;
+  --protuna-warning-accent: #8A6500;
+}
+
+body::selection,
+body ::selection {
+  background-color: #62625B;
+  color: #FAFAF8;
+}
+
+body[data-theme="dark"] {
+  --protuna-code-string: #c8e600;
+  --protuna-code-comment: #6B6B62;
+  --protuna-warning-accent: #D9B85F;
+}
+
+body[data-theme="dark"]::selection,
+body[data-theme="dark"] ::selection {
+  background-color: #C8E600;
+  color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="light"]) {
+    --protuna-code-string: #c8e600;
+    --protuna-code-comment: #6B6B62;
+    --protuna-warning-accent: #D9B85F;
+  }
+
+  body:not([data-theme="light"])::selection,
+  body:not([data-theme="light"]) ::selection {
+    background-color: #C8E600;
+    color: #000;
+  }
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  line-height: 1.65;
+  --color-api-name: var(--color-foreground-primary);
+  --color-api-pre-name: var(--color-foreground-secondary);
+  /* Keep visited links the same color as unvisited links in both themes. */
+  --color-link--visited: var(--color-link);
+  --color-link--visited--hover: var(--color-link--hover);
+  --color-sidebar-link-text--top-level: var(--color-foreground-secondary);
+  --color-sidebar-item-background--hover: var(--color-background-hover);
+  /* Match admonitions to the palette while keeping warnings distinct. */
+  --color-admonition-title--note: var(--color-brand-primary);
+  --color-admonition-title-background--note: var(--color-background-secondary);
+  --color-admonition-title--tip: var(--color-brand-primary);
+  --color-admonition-title-background--tip: var(--color-background-secondary);
+  --color-admonition-title--seealso: var(--color-brand-primary);
+  --color-admonition-title-background--seealso: var(--color-background-secondary);
+  --color-admonition-title--warning: var(--protuna-warning-accent);
+  --color-admonition-title-background--warning: var(--color-background-secondary);
+}
+
+.admonition.note,
+.admonition.tip,
+.admonition.warning,
+.admonition.seealso {
+  background-color: var(--color-background-primary);
+}
+
+.main,
+.content,
+.article-container {
+  min-width: 0;
+}
+
+.content {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 clamp(1.25rem, 3.5vw, 4rem);
+}
+
+article {
+  padding-top: 1.5rem;
+}
+
+article h1 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+article h2 {
+  margin-top: 2.6rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+article h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+article p {
+  margin: 0.85rem 0;
+}
+
+a {
+  text-underline-offset: 0.2em;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 3px;
+}
+
+.sidebar-brand {
+  padding-top: 1.75rem;
+  padding-bottom: 1.3rem;
+  padding-inline: 0.85rem;
+}
+
+.sidebar-logo-container {
+  width: 100%;
+}
+
+.sidebar-logo {
+  width: 90%;
+  height: auto;
+}
+
+.sidebar-tree {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.sidebar-tree .caption {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sidebar-tree a {
+  overflow-wrap: anywhere;
+}
+
+.sidebar-tree a:hover {
+  color: var(--color-foreground-primary);
+}
+
+.sidebar-tree .current-page>.reference {
+  font-weight: 600;
+  color: var(--color-foreground-primary);
+  background: var(--color-background-hover);
+  border-radius: 4px;
+}
+
+.sidebar-search-container {
+  margin: 0 0.85rem;
+  border-radius: 5px;
+}
+
+.sidebar-search {
+  border: 1px solid var(--color-background-border);
+  border-radius: 5px;
+}
+
+.toc-tree {
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.toc-title {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.toc-tree a {
+  overflow-wrap: anywhere;
+}
+
+.toc-tree code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-size: inherit;
+  background: transparent;
+  padding: 0;
+}
+
+.api-module {
+  color: var(--color-foreground-secondary);
+  font-family: var(--font-stack--monospace);
+  font-size: 0.8125rem;
+  margin-bottom: 1.75rem;
+}
+
+.sig {
+  line-height: 1.7;
+}
+
+.sig:not(.sig-inline) {
+  text-indent: 0;
+  font-weight: 500;
+  border: 1px solid var(--color-background-border);
+  border-radius: 5px;
+  padding: 0.8rem 1rem;
+  background: var(--color-code-background);
+  overflow-wrap: anywhere;
+}
+
+.highlight {
+  border: 1px solid var(--color-background-border);
+  border-radius: 6px;
+}
+
+.highlight pre {
+  padding: 1.1rem 1.25rem;
+  line-height: 1.65;
+}
+
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sd {
+  color: var(--protuna-code-string);
+}
+
+.highlight .c,
+.highlight .c1,
+.highlight .cm {
+  color: var(--protuna-code-comment);
+  font-style: italic;
+}
+
+/* Symbol indexes read as lists, with subtle rules instead of heavy grids. */
+table.autosummary {
+  width: 100%;
+  border: 0;
+  box-shadow: none;
+}
+
+table.autosummary td {
+  padding: 0.8rem 0.75rem;
+  border: 0;
+  border-bottom: 1px solid var(--color-background-border);
+  background: var(--color-background-primary);
+}
+
+table.autosummary td:first-child {
+  width: 34%;
+}
+
+table.autosummary tr:nth-child(2n) {
+  background: transparent;
+}
+
+table.autosummary p {
+  margin: 0;
+}
+
+/* Let separately generated summaries read as consecutive table rows. */
+[role=main] .joined-autosummaries>.table-wrapper:not(:last-child) {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+[role=main] .joined-autosummaries>.table-wrapper+.table-wrapper {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.doc-logo {
+  display: block;
+  width: 36rem;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 2rem;
+}
+
+.doc-intro {
+  max-width: 48rem;
+  font-size: 1.2rem;
+  color: var(--color-foreground-secondary);
+}
+
+.doc-eyebrow {
+  margin-top: 1.5rem;
+  color: var(--color-brand-primary);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.doc-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.doc-card {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-background-border);
+  border-radius: 6px;
+  color: var(--color-foreground-primary);
+  text-decoration: none;
+}
+
+.doc-card:hover {
+  border-color: var(--color-brand-primary);
+  background: var(--color-background-secondary);
+}
+
+/* Keep homepage cards charcoal across light-theme interaction states. */
+body[data-theme="light"] .doc-card {
+  color: #3A3A35;
+  --color-brand-primary: #3A3A35;
+  --color-link--visited: #3A3A35;
+  --color-link--hover: #3A3A35;
+  --color-link--visited--hover: #3A3A35;
+}
+
+@media (prefers-color-scheme: light) {
+  body:not([data-theme="dark"]) .doc-card {
+    color: #3A3A35;
+    --color-brand-primary: #3A3A35;
+    --color-link--visited: #3A3A35;
+    --color-link--hover: #3A3A35;
+    --color-link--visited--hover: #3A3A35;
+  }
+}
+
+.doc-card strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.doc-card span {
+  display: block;
+  color: var(--color-foreground-secondary);
+  font-size: 0.875rem;
+}
+
+.related-pages {
+  font-size: 0.8125rem;
+}
+
+/* Match Furo's drawer breakpoints; only change desktop column proportions. */
+@media (min-width: 67em) {
+  .sidebar-drawer {
+    width: 13rem;
+    min-width: 13rem;
+  }
+
+  .sidebar-container {
+    width: 13rem;
+  }
+
+  .main {
+    width: calc(100% - 13rem);
+  }
+
+  .content {
+    max-width: 78rem;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 82em) {
+  .toc-drawer {
+    width: 11rem;
+    flex: 0 0 11rem;
+    padding-right: 0.75rem;
+  }
+
+  .content {
+    width: calc(100% - 11rem);
+  }
+}
+
+@media (max-width: 66.999em) {
+  .main {
+    width: 100%;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 40em) {
+  .doc-links {
+    grid-template-columns: 1fr;
+  }
+
+  article {
+    padding-top: 0.75rem;
+  }
+
+  table.autosummary td {
+    padding: 0.65rem 0.4rem;
+  }
+
+  table.autosummary td:first-child {
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  html,
+  .sidebar-scroll,
+  .toc-scroll {
+    scroll-behavior: auto;
+  }
+
+  .sidebar-drawer,
+  .toc-drawer {
+    transition: none;
+  }
+}
+
+.simulation-plots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.simulation-plots figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.simulation-plots img {
+  width: 100%;
+  height: auto;
+}
+
+/* Keep methods distinct without putting every attribute in a box. */
+dl.py dl.py>.sig:not(.sig-inline) {
+  margin-top: 1.4rem;
+  padding: 0.55rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--color-background-border);
+  border-radius: 0;
+  background: transparent;
+}

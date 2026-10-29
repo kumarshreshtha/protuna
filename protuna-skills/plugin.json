@@ -1,0 +1,38 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "protuna-skills",
+  "version": "0.1.0",
+  "description": "Skills for coding with Protuna: build protein optimization pipelines and implement custom protein engineering components.",
+  "author": {
+    "name": "Kumar Shreshtha"
+  },
+  "homepage": "https://github.com/kumarshreshtha/protuna",
+  "repository": "https://github.com/kumarshreshtha/protuna",
+  "license": "MIT",
+  "keywords": [
+    "protuna",
+    "protein-engineering",
+    "lead-optimization",
+    "bayesian-optimization",
+    "machine-learning",
+    "python"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Protuna",
+        "shortDescription": "Create Protuna pipelines and components",
+        "longDescription": "Build, configure, run, and troubleshoot Protuna optimization pipelines for protein engineering. Implement custom samplers, acquisitions, recyclers, model adapters, predictors, constraints, and search rules using bundled API references and examples. Intended for projects using Protuna as a Python library. This plugin provides skills only; running code requires an execution environment with Protuna and the dependencies needed by your campaign.",
+        "developerName": "Kumar Shreshtha",
+        "category": "Developer Tools",
+        "capabilities": [],
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png",
+        "defaultPrompt": [
+          "Build a Protuna optimization pipeline using the sequences and constraints in my project.",
+          "Help me implement a custom Protuna component and verify its interface."
+        ]
+      }
+    }
+  }
+}

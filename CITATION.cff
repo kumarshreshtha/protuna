@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use Protuna in your research, please cite this software."
+type: software
+title: "Protuna: An optimization framework for AI-guided protein engineering"
+authors:
+  - family-names: Shreshtha
+    given-names: Kumar
+    email: kumar.shreshtha@protuna.org
+version: 0.1.0
+repository-code: "https://github.com/kumarshreshtha/protuna"
+url: "https://protuna.readthedocs.org"
+license: MIT
+keywords:
+  - protein engineering
+  - Bayesian optimization
+  - lead optimization
+  - machine learning
