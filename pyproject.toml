@@ -2,7 +2,7 @@
 name = "protuna"
 version = "0.1.0"
 description = "Optimization framework for AI-guided protein engineering"
-readme = "README.md"
+dynamic = ["readme"]
 authors = [
     { name = "Kumar Shreshtha", email = "kumar.shreshtha@protuna.org" }
 ]
@@ -32,8 +32,20 @@ Documentation = "https://protuna.readthedocs.org"
 Issues = "https://github.com/kumarshreshtha/protuna/issues"
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+fragments = [{ path = "README.md" }]
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = '(?m)^[ \t]*<img\b[^>]*#gh-dark-mode-only[^>]*>[ \t]*\r?\n?'
+replacement = ""
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = '#gh-light-mode-only'
+replacement = ""
 
 [tool.hatch.build.targets.wheel]
 packages = ["protuna"]
