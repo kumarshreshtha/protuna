@@ -2,6 +2,13 @@
     <img src="https://raw.githubusercontent.com/kumarshreshtha/protuna/main/docs/_static/protuna-wordmark-readme-dark.svg#gh-dark-mode-only" alt="Protuna" width="560">
     <img src="https://raw.githubusercontent.com/kumarshreshtha/protuna/main/docs/_static/protuna-wordmark-readme-light.svg#gh-light-mode-only" alt="Protuna" width="560">
 </p>
+<p align="center">
+    <a href="https://github.com/kumarshreshtha/protuna/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/kumarshreshtha/protuna/ci.yml?branch=main&amp;label=Tests"></a>
+    <img alt="Version" src="https://img.shields.io/github/v/release/kumarshreshtha/protuna">
+    <img alt="Language" src="https://img.shields.io/badge/python-3.12-yellow?logo=python&amp;logoColor=white">
+    <a href="https://protuna.readthedocs.io/en/latest/"><img alt="Docs" src="https://img.shields.io/readthedocs/protuna/latest?label=Docs"></a>
+    <img alt="License" src="https://img.shields.io/badge/license-MIT-green">
+</p>
 
 Protuna is an optimization framework for iterative protein engineering campaigns. Starting from historical mutagenesis data or a single hit[^1], it proposes the batch of variants to test next.
 
