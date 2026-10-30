@@ -17,10 +17,10 @@ Protuna is an optimization framework for iterative protein engineering campaigns
 ### Installation
 
 <!-- installation-start -->
-Protuna requires Python 3.12 or higher. A PyPI release is coming soon.
+Protuna requires Python 3.12 or higher.
 
 ```sh
-pip install git+https://github.com/kumarshreshtha/protuna.git
+pip install protuna
 ```
 <!-- installation-end -->
 
